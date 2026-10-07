@@ -16,6 +16,7 @@ BASE = "https://moden-coding.github.io/scrape-practice-site/shelter/"
 
 
 def fetch_and_save(url, path):
+    """Download the page at url, save it to path, and return the status code."""
     resp = requests.get(url, timeout=20)
     resp.encoding = "utf-8"
     with open(path, "w", encoding="utf-8") as f:
@@ -24,6 +25,7 @@ def fetch_and_save(url, path):
 
 
 def load_soup(path):
+    """Open a saved HTML file and return it as a BeautifulSoup object."""
     with open(path, encoding="utf-8") as f:
         return BeautifulSoup(f.read(), "html.parser")
 
@@ -42,6 +44,7 @@ def pet_urls(soup):
 
 
 def main():
+    """Fetch dogs-page-1, save it, and print how many dog page and pet URLs were found."""
     status = fetch_and_save(BASE + "dogs-page-1.html", "dogs-page-1.html")
     print("Status:", status)
     soup = load_soup("dogs-page-1.html")
